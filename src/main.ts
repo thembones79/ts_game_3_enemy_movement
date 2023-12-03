@@ -12,6 +12,9 @@ const ctx = canvas.getContext('2d')
 const CANVAS_HEIGHT = 1000
 const CANVAS_WIDTH = 500
 
+const numberOfEnemies = 100
+const enemies: Enemy[] = []
+
 canvas.width = CANVAS_WIDTH
 canvas.height = CANVAS_HEIGHT
 
@@ -21,8 +24,8 @@ class Enemy {
     width: number
     height: number
     constructor() {
-        this.x = Math.random()*canvas.width;
-        this.y = 50
+        this.x = Math.random() * canvas.width
+        this.y = Math.random() * canvas.height
         this.width = 100
         this.height = 100
     }
@@ -39,11 +42,13 @@ class Enemy {
     }
 }
 
-const enemy1 = new Enemy()
+for (let i = 0; i < numberOfEnemies; i++) {
+    enemies.push(new Enemy())
+}
 
 const animate = () => {
     ctx?.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-    enemy1.animate()
+    enemies.forEach((enemy) => enemy.animate())
     requestAnimationFrame(animate)
 }
 
