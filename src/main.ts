@@ -21,10 +21,21 @@ class Enemy {
     width: number
     height: number
     constructor() {
-        this.x = 10
+        this.x = Math.random()*canvas.width;
         this.y = 50
         this.width = 100
         this.height = 100
+    }
+    update() {
+        this.x++
+        this.y++
+    }
+    draw() {
+        ctx?.fillRect(this.x, this.y, this.width, this.height)
+    }
+    animate() {
+        this.update()
+        this.draw()
     }
 }
 
@@ -32,8 +43,7 @@ const enemy1 = new Enemy()
 
 const animate = () => {
     ctx?.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT)
-    enemy1.x++
-    ctx?.fillRect(enemy1.x, enemy1.y, enemy1.width, enemy1.height)
+    enemy1.animate()
     requestAnimationFrame(animate)
 }
 
