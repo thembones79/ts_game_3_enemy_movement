@@ -23,15 +23,17 @@ class Enemy {
     y: number
     width: number
     height: number
+    speed: number
     constructor() {
         this.x = Math.random() * canvas.width
         this.y = Math.random() * canvas.height
+        this.speed = Math.random() * 4 - 2
         this.width = 100
         this.height = 100
     }
     update() {
-        this.x++
-        this.y++
+        this.x += this.speed;
+        this.y += this.speed;
     }
     draw() {
         ctx?.fillRect(this.x, this.y, this.width, this.height)
