@@ -11,12 +11,14 @@ const ctx = canvas.getContext('2d')
 
 const CANVAS_HEIGHT = 1000
 const CANVAS_WIDTH = 500
+canvas.width = CANVAS_WIDTH
+canvas.height = CANVAS_HEIGHT
 
 const numberOfEnemies = 100
 const enemies: Enemy[] = []
 
-canvas.width = CANVAS_WIDTH
-canvas.height = CANVAS_HEIGHT
+const enemyImage = new Image()
+enemyImage.src = 'assets/enemy1.png'
 
 class Enemy {
     x: number
@@ -32,11 +34,12 @@ class Enemy {
         this.height = 100
     }
     update() {
-        this.x += this.speed;
-        this.y += this.speed;
+        this.x += this.speed
+        this.y += this.speed
     }
     draw() {
-        ctx?.fillRect(this.x, this.y, this.width, this.height)
+        ctx?.strokeRect(this.x, this.y, this.width, this.height)
+        ctx?.drawImage(enemyImage, this.x, this.y)
     }
     animate() {
         this.update()
