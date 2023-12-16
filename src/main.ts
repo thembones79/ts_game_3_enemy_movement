@@ -17,6 +17,8 @@ canvas.height = CANVAS_HEIGHT
 const numberOfEnemies = 100
 const enemies: Enemy[] = []
 
+const gameFrame = 0
+
 const enemyImage = new Image()
 enemyImage.src = 'assets/enemy1.png'
 
@@ -24,22 +26,40 @@ class Enemy {
     x: number
     y: number
     width: number
+    spriteHeight: number
+    spriteWidth: number
     height: number
     speed: number
+    frame: number
     constructor() {
         this.x = Math.random() * canvas.width
         this.y = Math.random() * canvas.height
         this.speed = Math.random() * 4 - 2
-        this.width = 100
-        this.height = 100
+        this.spriteWidth = 293
+        this.spriteHeight = 155
+        this.width = this.spriteWidth * 0.4
+        this.height = this.spriteHeight * 0.4
+        this.frame = 0
     }
     update() {
         this.x += this.speed
         this.y += this.speed
+        if (gameFrame % 2 === 0)
+            this.frame > 4 ? (this.frame = 0) : this.frame++
     }
     draw() {
         ctx?.strokeRect(this.x, this.y, this.width, this.height)
-        ctx?.drawImage(enemyImage, this.x, this.y)
+        ctx?.drawImage(
+            enemyImage,
+            this.frame * this.spriteWidth,
+            0,
+            this.spriteWidth,
+            this.spriteHeight,
+            this.x,
+            this.y,
+            this.width,
+            this.height
+        )
     }
     animate() {
         this.update()
